@@ -12,7 +12,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed flex top-0 left-0 right-0 z-50 bg-zinc-100 w-full h-24 shadow-xl border-b border-slate-100 px-8 py-2 ">
+    <nav className="sticky flex top-0 left-0 right-0 z-50 bg-zinc-100 w-full h-24 shadow-xl border-b border-slate-100 px-8 py-2 ">
       <Image
         src="/logo-text.svg"
         alt="Logo"
