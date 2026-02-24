@@ -40,7 +40,7 @@ export default function Navbar() {
         </li>
       </ul>
       <button
-        className="md:hidden ml-auto transition-all duration-200"
+        className="md:hidden ml-auto transition-all duration-200 cursor-pointer"
         onClick={toggleMenu}
       >
         {isMenuOpen ? (
