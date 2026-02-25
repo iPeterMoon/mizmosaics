@@ -4,8 +4,8 @@ import { Facebook, Instagram, Envelope, LocationPin, Phone } from "@boxicons/rea
 const quickLinks = [
   { name: "Home", href: "#" },
   { name: "About Us", href: "#" },
+  { name: "Contact", href: "#" },
   { name: "Collections", href: "#" },
-  { name: "Installation", href: "#" },
 ];
 
 const services = [

@@ -1,4 +1,5 @@
 import { Playfair_Display } from "next/font/google";
+import { Envelope, Phone } from "@boxicons/react";
 
 const playfair = Playfair_Display({
   variable: "--font-title-display",
@@ -10,26 +11,15 @@ export default function ContactInfo() {
     {
       title: "Email",
       value: "info@mizmosaics.com",
-      icon: "✉️",
+      icon: <Envelope pack="filled" size="xl" className="text-primarylight"/>,
       link: "mailto:info@mizmosaics.com",
     },
     {
       title: "Phone",
       value: "(555) 123-4567",
-      icon: "📱",
+      icon: <Phone pack='filled' size='xl' className="text-primarylight"/>,
       link: "tel:+15551234567",
-    },
-    {
-      title: "Address",
-      value: "123 Mosaic Lane, Creative City, CA 90000",
-      icon: "📍",
-      link: "https://maps.google.com",
-    },
-    {
-      title: "Hours",
-      value: "Mon - Fri: 9:00 AM - 6:00 PM PT",
-      icon: "🕐",
-    },
+    }
   ];
 
   return (
@@ -44,10 +34,10 @@ export default function ContactInfo() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="flex justify-center gap-32 items-center text-center">
           {contactMethods.map((method, index) => (
             <div key={index} className="text-center">
-              <div className="text-5xl mb-4">{method.icon}</div>
+              <div className="text-5xl mb-4 flex items-center justify-center">{method.icon}</div>
               <h3 className="font-bold text-lg text-gray-900 mb-2">{method.title}</h3>
               {method.link ? (
                 <a

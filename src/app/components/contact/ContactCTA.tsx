@@ -17,7 +17,7 @@ export default function ContactCTA() {
           our team is ready to bring your vision to life.
         </p>
         <button className="bg-white text-primarylight px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-          Schedule a Consultation
+          View Collection
         </button>
       </div>
     </section>
