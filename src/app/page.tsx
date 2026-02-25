@@ -1,8 +1,8 @@
-import CollectionPreview from "@/components/CollectionPreview";
-import MosaicComparison from "@/components/MosaicComparison";
-import HeroSection from "@/components/HeroSection";
-import MountingSystem from "@/components/MountingSystem";
-import SectionSeparator from "@/components/SectionSeparator";
+import CollectionPreview from "@/src/app/components/CollectionPreview";
+import MosaicComparison from "@/src/app/components/MosaicComparison";
+import HeroSection from "@/src/app/components/HeroSection";
+import MountingSystem from "@/src/app/components/MountingSystem";
+import SectionSeparator from "@/src/app/components/SectionSeparator";
 
 export default function Home() {
   return (

@@ -1,7 +1,7 @@
-import ContactHero from "@/components/contact/ContactHero";
-import ContactForm from "@/components/contact/ContactForm";
-import ContactInfo from "@/components/contact/ContactInfo";
-import ContactCTA from "@/components/contact/ContactCTA";
+import ContactHero from "@/src/app/components/contact/ContactHero";
+import ContactForm from "@/src/app/components/contact/ContactForm";
+import ContactInfo from "@/src/app/components/contact/ContactInfo";
+import ContactCTA from "@/src/app/components/contact/ContactCTA";
 
 export default function Contact() {
   return (
