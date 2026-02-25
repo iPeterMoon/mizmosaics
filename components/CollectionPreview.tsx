@@ -9,17 +9,17 @@ interface MosaicPhoto {
 
 const mosaicPhotos: MosaicPhoto[] = [
   {
-    src: "https://placehold.co/400x500/png",
+    src: "/mosaic1.png",
     alt: "Mosaic Collection 1",
     className: "md:rotate-3 md:-translate-y-4 md:ml-8",
   },
   {
-    src: "https://placehold.co/350x400/png",
+    src: "/mosaic2.png",
     alt: "Mosaic Collection 2",
     className: "md:-rotate-2 md:translate-y-6 md:-mr-4",
   },
   {
-    src: "https://placehold.co/380x450/png",
+    src: "/mosaic3.png",
     alt: "Mosaic Collection 3",
     className: "md:rotate-4 md:translate-y-2 md:ml-4",
   },
@@ -65,7 +65,6 @@ export default function CollectionPreview() {
                 className="transition-transform duration-700 hover:scale-110"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                <span className="text-white font-semibold text-lg">View Details</span>
               </div>
             </div>
           ))}

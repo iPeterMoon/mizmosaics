@@ -36,7 +36,7 @@ export default function MosaicComparison() {
           <div className="flex flex-col gap-6">
             <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="https://placehold.co/600x400/png"
+                src="/mosaic_pixel.png"
                 alt="Standard Mosaics - Pixel Art Style"
                 fill
                 style={{ objectFit: "cover" }}
@@ -67,7 +67,7 @@ export default function MosaicComparison() {
           <div className="flex flex-col gap-6">
             <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="https://placehold.co/600x400/png"
+                src="/mosaic_hand_cut.png"
                 alt="Artisan Mosaics - Hand-Cut Style"
                 fill
                 style={{ objectFit: "cover" }}

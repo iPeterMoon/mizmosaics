@@ -44,7 +44,7 @@ export default function AboutVision() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
           <div className="relative h-96 w-full rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="/Hero-Image.png"
+              src="/mosaic4.png"
               alt="Mosaic art"
               fill={true}
               style={{ objectFit: "cover" }}

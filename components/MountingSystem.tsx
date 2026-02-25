@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function MountingSystem() {
   return (
     <section className="py-16 px-4 md:px-8 lg:px-16 bg-white">
@@ -8,8 +10,13 @@ export default function MountingSystem() {
 
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
           <div className="w-full md:w-1/2">
-            <div className="relative aspect-square bg-zinc-100 rounded-lg overflow-hidden flex items-center justify-center">
-              <p className="text-zinc-400 text-sm">Mounting System Image</p>
+            <div className="relative aspect-square bg-zinc-100 rounded-lg overflow-hidden flex items-center justify-center shadow-xl">
+              <Image
+                src="/mounting.jpeg"
+                alt="Mounting System Image"
+                fill
+                style={{ objectFit: "cover" }}/>
+              <div className="inset-1 "></div>
             </div>
           </div>
 
