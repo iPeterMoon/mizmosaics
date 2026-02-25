@@ -1,9 +1,7 @@
-import Navbar from "@/components/Navbar";
 import CollectionPreview from "@/components/CollectionPreview";
 import MosaicComparison from "@/components/MosaicComparison";
 import HeroSection from "@/components/HeroSection";
 import MountingSystem from "@/components/MountingSystem";
-import Footer from "@/components/Footer";
 import SectionSeparator from "@/components/SectionSeparator";
 
 export default function Home() {

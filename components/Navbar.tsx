@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { AlbumCovers, Menu, MenuClose } from "@boxicons/react";
 import { useState } from "react";
 
@@ -21,15 +22,21 @@ export default function Navbar() {
         className="cursor-pointer"
       />
       <ul className="items-center gap-8 ml-auto text-primary hidden md:flex">
-        <li className="cursor-pointer hover:bg-indigo-100  text-xl xl:text-2xl font-bold transition-all duration-300 py-2 px-4 rounded-2xl">
-          Home
-        </li>
-        <li className="cursor-pointer hover:bg-indigo-100  text-xl xl:text-2xl font-bold transition-all duration-300 py-2 px-4 rounded-2xl">
-          About
-        </li>
-        <li className="cursor-pointer hover:bg-indigo-100  text-xl xl:text-2xl font-bold transition-all duration-300 py-2 px-4 rounded-2xl">
-          Contact
-        </li>
+        <Link href="/">
+          <li className="cursor-pointer hover:bg-indigo-100  text-xl xl:text-2xl font-bold transition-all duration-300 py-2 px-4 rounded-2xl">
+            Home
+          </li>
+        </Link>
+        <Link href="/about">
+          <li className="cursor-pointer hover:bg-indigo-100  text-xl xl:text-2xl font-bold transition-all duration-300 py-2 px-4 rounded-2xl">
+            About
+          </li>
+        </Link>
+        <Link href="/contact">
+          <li className="cursor-pointer hover:bg-indigo-100  text-xl xl:text-2xl font-bold transition-all duration-300 py-2 px-4 rounded-2xl">
+            Contact
+          </li>
+        </Link>
         <li className="hidden lg:block">
           <button className="bg-primary text-white px-6 h-12 rounded-lg hover:bg-sky-700 hover:scale-105 transition-all duration-300 xl:ml-24 cursor-pointer mr-10 drop-shadow-2xl flex text-xl font-bold">
             <span className="flex items-center gap-2">
@@ -51,9 +58,7 @@ export default function Navbar() {
       </button>
       <ul
         className={`absolute top-24 right-0 bg-zinc-100 w-full flex flex-col items-center gap-2 overflow-hidden transition-all duration-500 ease-in-out shadow-xl ${
-          isMenuOpen
-            ? "max-h-125 opacity-100"
-            : "max-h-0 opacity-0"
+          isMenuOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <li className="cursor-pointer text-center text-primary text-xl xl:text-2xl font-bold py-2 mx-3 border-b-2 w-9/10 border-slate-400 transition-all duration-300 hover:scale-105 hover:text-indigo-600">
