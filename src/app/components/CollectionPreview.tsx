@@ -64,7 +64,7 @@ export default function CollectionPreview() {
                 style={{ objectFit: "cover" }}
                 className="transition-transform duration-700 hover:scale-110"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
               </div>
             </div>
           ))}
