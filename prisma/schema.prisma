@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id               Int       @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  bussinessName    String
+  email            String    @unique
+  passwordHash     String
+  registrationDate DateTime  @default(now())
+  projects         Project[]
+}
+
+model Project {
+  id           Int      @id @default(autoincrement())
+  name         String
+  description  String
+  creationDate DateTime @default(now())
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+  quotes       Quote[]
+
+  @@index([userId], map: "Project_userId_fkey")
+}
+
+model Quote {
+  id              Int            @id @default(autoincrement())
+  notes           String?        @db.Text
+  status          String         @default("BORRADOR")
+  estimatedPrice  Float?
+  stripeSessionId String?        @unique
+  paidDeposit     Boolean        @default(false)
+  requestedAt     DateTime       @default(now())
+  lastUpdated     DateTime       @updatedAt
+  projectId       Int
+  project         Project        @relation(fields: [projectId], references: [id])
+  quoteHistory    QuoteHistory[]
+  quoteItems      QuoteItem[]
+
+  @@index([projectId], map: "Quote_projectId_fkey")
+}
+
+model QuoteItem {
+  id              Int        @id @default(autoincrement())
+  widthFeet       Float
+  heightFeet      Float
+  squareFeet      Float
+  imageUrl        String
+  calculatedPrice Float
+  quoteId         Int
+  techniqueId     Int?
+  quote           Quote      @relation(fields: [quoteId], references: [id])
+  technique       Technique? @relation(fields: [techniqueId], references: [id])
+
+  @@index([quoteId], map: "QuoteItem_quoteId_fkey")
+  @@index([techniqueId], map: "QuoteItem_techniqueId_fkey")
+}
+
+model Technique {
+  id               Int         @id @default(autoincrement())
+  name             String
+  description      String      @db.Text
+  squaredFeetPrice Float
+  quoteItems       QuoteItem[]
+}
+
+model QuoteHistory {
+  id               Int      @id @default(autoincrement())
+  eventTitle       String
+  eventDescription String?  @db.Text
+  previousStatus   String?
+  newStatus        String?
+  changedAt        DateTime @default(now())
+  quoteId          Int
+  quote            Quote    @relation(fields: [quoteId], references: [id])
+
+  @@index([quoteId], map: "QuoteHistory_quoteId_fkey")
+}
