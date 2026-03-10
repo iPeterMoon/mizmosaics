@@ -1,4 +1,5 @@
 import { Playfair_Display } from "next/font/google";
+import Link from "next/link";
 
 const playfair = Playfair_Display({
   variable: "--font-title-display",
@@ -16,9 +17,11 @@ export default function ContactCTA() {
           Whether you're looking for a custom mosaic installation or have questions about our services,
           our team is ready to bring your vision to life.
         </p>
-        <button className="bg-white text-primarylight px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-          View Collection
-        </button>
+        <Link href="/login">
+          <button className="bg-white text-primarylight px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+            Start Your Project
+          </button>
+        </Link>
       </div>
     </section>
   );

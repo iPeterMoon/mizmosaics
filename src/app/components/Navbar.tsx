@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AlbumCovers, Menu, MenuClose } from "@boxicons/react";
+import { User, Menu, MenuClose } from "@boxicons/react";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -38,12 +38,14 @@ export default function Navbar() {
           </li>
         </Link>
         <li className="hidden lg:block">
-          <button className="bg-primary text-white px-6 h-12 rounded-lg hover:bg-sky-700 hover:scale-105 transition-all duration-300 xl:ml-24 cursor-pointer mr-10 drop-shadow-2xl flex text-xl font-bold">
-            <span className="flex items-center gap-2">
-              View Collection{" "}
-              <AlbumCovers pack="filled" size="xs" className="top-0" />
-            </span>
-          </button>
+          <Link href="/login">
+            <button className="bg-primary text-white px-6 h-12 rounded-lg hover:bg-sky-700 hover:scale-105 transition-all duration-300 xl:ml-24 cursor-pointer mr-10 drop-shadow-2xl flex text-xl font-bold">
+              <span className="flex items-center gap-2">
+                Client Portal{" "}
+                <User pack="filled" size="xs" className="top-0" />
+              </span>
+            </button>
+          </Link>
         </li>
       </ul>
       <button
@@ -70,9 +72,11 @@ export default function Navbar() {
         <li className="cursor-pointer text-center text-primary text-xl xl:text-2xl font-bold py-2 mx-3 border-b-2 w-9/10 border-slate-400 transition-all duration-300 hover:scale-105 hover:text-indigo-600">
           Contact
         </li>
-        <li className="cursor-pointer text-center text-primary text-xl xl:text-2xl font-bold py-2 mx-3 border-b-2 w-9/10 border-slate-400 transition-all duration-300 hover:scale-105 hover:text-indigo-600">
-          View Collection
-        </li>
+        <Link href="/login">
+          <li className="cursor-pointer text-center text-primary text-xl xl:text-2xl font-bold py-2 mx-3 border-b-2 w-9/10 border-slate-400 transition-all duration-300 hover:scale-105 hover:text-indigo-600">
+            Client Portal
+          </li>
+        </Link>
       </ul>
     </nav>
   );

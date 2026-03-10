@@ -49,8 +49,8 @@ export default function MosaicComparison() {
                 Standard Mosaics
               </h3>
               <p className="text-zinc-600 mb-4">
-                Our standard mosaic collection features precision-cut tiles in a classic pixel art
-                aesthetic. Perfect for those seeking consistent patterns and clean lines.
+                Our precision-cut glass mosaic tiles feature a classic pixel art aesthetic.
+                Perfect for those seeking consistent patterns and clean lines in custom fabrications.
               </p>
               <ul className="space-y-2">
                 {standardFeatures.map((feature, index) => (
