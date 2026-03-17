@@ -4,6 +4,7 @@ import AboutStats from "@/src/app/components/about/AboutStats";
 import AboutValues from "@/src/app/components/about/AboutValues";
 import AboutProcess from "@/src/app/components/about/AboutProcess";
 import AboutCTA from "@/src/app/components/about/AboutCTA";
+import Navbar from "../components/Navbar";
 
 export default function About() {
   return (

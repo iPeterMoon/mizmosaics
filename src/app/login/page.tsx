@@ -1,36 +1,57 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Envelope,
   ArrowBigLeft,
   ArrowBigRight,
-  Business,
   Lock,
+  EyeAlt as Hide,
+  EyeClosed as Show,
 } from "@boxicons/react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+
+const CELLS = [...Array(96)].map((_, i) => ({
+    id: i,
+    bg: `rgba(${120 + Math.random() * 60}, ${140 + Math.random() * 60}, ${180 + Math.random() * 60}, ${Math.random() * 0.3})`,
+  }));
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
 
-    // TODO: Integrate with NextAuth signIn
-    console.log("Login attempt:", { email, password });
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
 
-    setTimeout(() => {
+      if (result?.error) {
+        setError("Invalid email or password.");
+      } else {
+        router.push('/dashboard');
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
-  const CELLS = [...Array(96)].map((_, i) => ({
-    id: i,
-    bg: `rgba(${120 + Math.random() * 60}, ${140 + Math.random() * 60}, ${180 + Math.random() * 60}, ${Math.random() * 0.3})`,
-  }));
+  
 
   const [mounted, setMounted] = useState(false);
 
@@ -42,22 +63,19 @@ export default function LoginPage() {
     <div className="min-h-screen bg-white flex">
       {/* Left Side - Form */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-12 lg:px-16 xl:px-24">
-        {/* Back to Home */}
+        {/* Back Link */}
         <Link
           href="/"
-          className="absolute top-6 left-6 lg:left-12 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-8"
         >
-          <ArrowBigLeft className="w-5 h-5" />
-          <span className="text-sm font-medium">Back to Home</span>
+          <ArrowBigLeft size="sm" pack="filled" />
+          Back to Home
         </Link>
-
         {/* Logo/Brand */}
-        <div className="mb-12 mt-12 lg:mt-0">
+        <div className="mb-12 mt-12 lg:mt-0 flex flex-col gap-3">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-              <Business className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">MizMosaics</span>
+              <Image src="/logo-text.svg" alt="Logo" width={200} height={100} />
+          
           </div>
           <p className="text-gray-500 text-sm mt-1">
             Custom Glass Mosaics for Architecture
@@ -67,13 +85,20 @@ export default function LoginPage() {
         {/* Heading */}
         <div className="mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-            B2B Portal Access
+            Portal Access
           </h1>
           <p className="text-gray-600 text-lg">
             Sign in to access your custom mosaic projects and fabrication
             requests.
           </p>
         </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-red-600 text-sm">{error}</p>
+          </div>
+        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -83,7 +108,7 @@ export default function LoginPage() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Work Email
+              Email
             </label>
             <div className="relative">
               <Envelope className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -119,13 +144,24 @@ export default function LoginPage() {
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-400"
+                className="w-full pl-12 pr-12 py-3.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-400"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                {showPassword ? (
+                  <Hide className="w-5 h-5" />
+                ) : (
+                  <Show className="w-5 h-5" />
+                )}
+              </button>
             </div>
           </div>
 
@@ -158,7 +194,7 @@ export default function LoginPage() {
             ) : (
               <>
                 Sign In
-                <ArrowBigRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowBigRight className="group-hover:translate-x-1 transition-transform" pack="filled" />
               </>
             )}
           </button>
@@ -166,12 +202,12 @@ export default function LoginPage() {
 
         {/* Register Link */}
         <p className="mt-8 text-center text-gray-600">
-          Don't have a B2B account?{" "}
+          Don't have an account?{" "}
           <Link
-            href="/request-access"
+            href="/register"
             className="text-gray-900 font-semibold hover:underline"
           >
-            Request Access
+            Register
           </Link>
         </p>
 
@@ -210,12 +246,12 @@ export default function LoginPage() {
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8">
               <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
               <span className="text-white/90 text-sm font-medium">
-                Trusted by 500+ Architects & Builders
+                Now Open for New Projects
               </span>
             </div>
 
             <h2 className="text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight">
-              Transform Your Designs Into
+              Craft Your Vision With
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-400">
                 {" "}
                 Glass Mosaics
@@ -223,48 +259,45 @@ export default function LoginPage() {
             </h2>
 
             <p className="text-white/70 text-lg leading-relaxed mb-12">
-              Upload your blueprints or images, and we'll craft bespoke glass
-              mosaics tailored to your architectural vision. Precision
-              fabrication meets unlimited customization.
+              Bring your architectural designs to life with our custom glass mosaics.
+              From intricate patterns to personalized masterpieces, we're here to
+              help you create something truly unique.
             </p>
 
-            {/* Testimonial */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-left">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-linear-to-br from-emerald-400 to-cyan-400 rounded-full flex items-center justify-center shrink-0">
-                  <span className="text-white font-bold text-lg">JM</span>
+            {/* Features */}
+            <div className="space-y-4 mb-12">
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 text-left flex items-start gap-4">
+                <div className="w-10 h-10 bg-emerald-400/20 rounded-lg flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
                 </div>
                 <div>
-                  <p className="text-white/90 italic mb-3">
-                    "The precision and quality of MizMosaics transformed our
-                    luxury pool project. Their custom fabrication capabilities
-                    are unmatched in the industry."
-                  </p>
-                  <div>
-                    <p className="text-white font-semibold">
-                      Jennifer Martinez
-                    </p>
-                    <p className="text-white/60 text-sm">
-                      Principal Architect, Martinez Design Studio
-                    </p>
-                  </div>
+                  <p className="text-white font-semibold mb-1">Custom Designs</p>
+                  <p className="text-white/60 text-sm">Upload your own artwork or collaborate on new concepts</p>
                 </div>
               </div>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-12">
-              <div>
-                <p className="text-3xl font-bold text-white">15+</p>
-                <p className="text-white/60 text-sm">Years Experience</p>
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 text-left flex items-start gap-4">
+                <div className="w-10 h-10 bg-cyan-400/20 rounded-lg flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-white font-semibold mb-1">Premium Quality</p>
+                  <p className="text-white/60 text-sm">Durable materials crafted for lasting beauty</p>
+                </div>
               </div>
-              <div>
-                <p className="text-3xl font-bold text-white">2,500+</p>
-                <p className="text-white/60 text-sm">Custom Projects</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-white">99.8%</p>
-                <p className="text-white/60 text-sm">Client Satisfaction</p>
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 text-left flex items-start gap-4">
+                <div className="w-10 h-10 bg-violet-400/20 rounded-lg flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-white font-semibold mb-1">Expert Guidance</p>
+                  <p className="text-white/60 text-sm">Personalized support throughout your project</p>
+                </div>
               </div>
             </div>
           </div>

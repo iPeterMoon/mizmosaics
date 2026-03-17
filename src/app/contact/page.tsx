@@ -2,6 +2,7 @@ import ContactHero from "@/src/app/components/contact/ContactHero";
 import ContactForm from "@/src/app/components/contact/ContactForm";
 import ContactInfo from "@/src/app/components/contact/ContactInfo";
 import ContactCTA from "@/src/app/components/contact/ContactCTA";
+import Navbar from "../components/Navbar";
 
 export default function Contact() {
   return (

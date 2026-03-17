@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display} from "next/font/google";
-import Navbar from "@/src/app/components/Navbar";
 import Footer from "@/src/app/components/Footer";
 import "./globals.css";
+import { Providers } from "./providers";
+import ClientLayout from "./client-layout";
 
 
 const geistSans = Geist({
@@ -34,9 +35,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
       >
-        <Navbar></Navbar>
-        {children}
-        <Footer></Footer>
+        <Providers>
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </Providers>
       </body>
     </html>
   );

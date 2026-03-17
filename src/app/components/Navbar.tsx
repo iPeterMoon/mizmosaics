@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { User, Menu, MenuClose } from "@boxicons/react";
+import { UserCircle, Menu, MenuClose } from "@boxicons/react";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -37,14 +37,9 @@ export default function Navbar() {
             Contact
           </li>
         </Link>
-        <li className="hidden lg:block">
+        <li className="hidden lg:block hover:text-secondary trnasition-all duration-300 hover:scale-105">
           <Link href="/login">
-            <button className="bg-primary text-white px-6 h-12 rounded-lg hover:bg-sky-700 hover:scale-105 transition-all duration-300 xl:ml-24 cursor-pointer mr-10 drop-shadow-2xl flex text-xl font-bold">
-              <span className="flex items-center gap-2">
-                Client Portal{" "}
-                <User pack="filled" size="xs" className="top-0" />
-              </span>
-            </button>
+                <UserCircle pack="filled" size="xl" className="top-0" />
           </Link>
         </li>
       </ul>

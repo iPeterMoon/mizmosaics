@@ -3,6 +3,7 @@ import MosaicComparison from "@/src/app/components/MosaicComparison";
 import HeroSection from "@/src/app/components/HeroSection";
 import MountingSystem from "@/src/app/components/MountingSystem";
 import SectionSeparator from "@/src/app/components/SectionSeparator";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
   return (
